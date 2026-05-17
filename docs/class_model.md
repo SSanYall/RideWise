@@ -1,6 +1,6 @@
 ﻿# RideWise - Class Model & Architecture
 ## System Architecture
-\\\mermaid
+```mermaid
 graph TB
     Main[Main.java]
     RiderService[RiderService]
@@ -9,7 +9,7 @@ graph TB
     Main -->|uses| RiderService
     Main -->|uses| DriverService
     Main -->|uses| RideService
-\\\
+```
 ## Core Domain Classes
 **Rider** - id, name, location
 **Driver** - id, name, locationX/Y, vehicleType, available, completedRides
@@ -32,14 +32,14 @@ graph TB
 - **IdGenerator**: Generates unique IDs (thread-safe)
 - **OfflineGeocoder**: Maps localities to coordinates
 ## Class Relationships
-\\\mermaid
+```mermaid
 graph LR
     Ride --> Rider
     Ride --> Driver
     Driver --> VehicleType
     RideService --> RideMatchingStrategy
     RideService --> FareStrategy
-\\\
+```
 ## Design Patterns
 - Strategy Pattern: Flexible matching and fare algorithms
 - Service Layer: Business logic separation

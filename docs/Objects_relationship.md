@@ -1,6 +1,6 @@
 ﻿# RideWise - Object Relationships & Interactions
 ## Entity Relationships
-\\\mermaid
+```mermaid
 erDiagram
     RIDER ||--o{ RIDE : requests
     DRIVER ||--o{ RIDE : completes
@@ -40,7 +40,7 @@ erDiagram
     RIDESTATUS {
         string status PK
     }
-\\\
+```
 ## Object Composition
 **Ride** has-a **Rider** (composition)
 - Rider is required for a ride to exist
@@ -59,7 +59,7 @@ erDiagram
 - Cannot be changed after registration
 ## Interaction Flow Diagrams
 ### Ride Request Flow
-\\\mermaid
+```mermaid
 sequenceDiagram
     participant User
     participant Main
@@ -73,9 +73,9 @@ sequenceDiagram
     RideService->>RideService: Create Ride(REQUESTED)
     RideService-->>Main: Ride object
     Main-->>User: Ride created
-\\\
+```
 ### Ride Assignment Flow
-\\\mermaid
+```mermaid
 sequenceDiagram
     participant Main
     participant DriverService
@@ -89,9 +89,9 @@ sequenceDiagram
     Strategy-->>RideService: Selected Driver
     RideService->>Driver: setAvailable(false)
     RideService-->>Main: Updated Ride(ASSIGNED)
-\\\
+```
 ### Ride Completion Flow
-\\\mermaid
+```mermaid
 sequenceDiagram
     participant Main
     participant RideService
@@ -104,9 +104,9 @@ sequenceDiagram
     RideService->>Driver: incrementCompletedRides()
     RideService->>Driver: setAvailable(true)
     RideService-->>Main: Ride(COMPLETED)
-\\\
+```
 ## Service-to-Service Relationships
-\\\mermaid
+```mermaid
 graph TB
     Main[Main.java]
     Main -->|creates| RS[RiderService]
@@ -120,9 +120,9 @@ graph TB
     RideS -->|uses| FareStrategy[FareStrategy]
     MatchStrategy -->|reads| DS
     FareStrategy -->|reads| RideService
-\\\
+```
 ## Data Flow State Machine
-\\\mermaid
+```mermaid
 stateDiagram-v2
     [*] --> RiderRegistered: registerRider()
     [*] --> DriverRegistered: registerDriver()
@@ -137,7 +137,7 @@ stateDiagram-v2
     DriverAvailable --> DriverBusy: assignDriver()
     DriverBusy --> DriverAvailable: completeRide()
     DriverBusy --> DriverAvailable: cancelRide()
-\\\
+```
 ## Object Lifecycle
 ### Rider Lifecycle
 1. **Creation**: registerRider() → Rider object created
@@ -160,7 +160,7 @@ stateDiagram-v2
 2. **Attached**: Added to ride object
 3. **Persistent**: Remains for audit/history
 ## Dependency Graph
-\\\mermaid
+```mermaid
 graph LR
     Main[Main]
     MainServices[Services]
@@ -175,4 +175,4 @@ graph LR
     ServiceAbstractions -->|implemented by| ServiceImpl
     ServiceImpl -->|processes| Entities
     Utils -->|generates/maps| Entities
-\\\
+```
